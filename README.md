@@ -79,6 +79,7 @@ SigninLogs
 | project TimeGenerated, IPAddress, Location, ResultType, ResultDescription
 | order by TimeGenerated asc
 ```
+![Correlation query results in Sentinel](correlation-query-redacted.png)
 
 **Results:**
 
@@ -89,6 +90,21 @@ SigninLogs
 | 8/8/2026 3:14:00 AM | 197.210.53.42 | **NG** | 0 | **Success — attacker sign-in** |
 
 **Finding:** The CEO account authenticated legitimately from a US-based IP at 1:23 AM, then successfully authenticated again just **51 minutes later from Lagos, Nigeria** — a location change not physically achievable in that timeframe by any means of legitimate travel. This satisfies the classic "impossible travel" indicator used across SIEM/UEBA detections industry-wide.
+
+### Incident Graph
+
+After refining entity mapping on the analytics rule, the incident graph
+correctly visualizes the relationship between the compromised account and
+the attacker's IP address:
+
+![Incident graph with entity mapping](Screenshot%202026-08-07%20204410.png)
+
+> **Note:** Incident IDs increment (1 → 4) across this investigation. This
+> reflects multiple re-triggers of the `FakeAttackerSignIn` simulation while
+> tuning entity mapping on the analytics rule — each incident represents the
+> same underlying detection logic, not a separate finding.
+>
+> ![Password reset confirmation in Entra ID](Screenshot%202026-08-07%20194149.png)
 
 ## MITRE ATT&CK Mapping
 
