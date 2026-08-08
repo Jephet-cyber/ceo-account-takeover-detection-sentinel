@@ -47,6 +47,7 @@ Deployed a **Scheduled query rule** in Sentinel: **"Impossible Travel - CEO Acco
   | where Location == "NG"
   | where ResultType == "0"
   ```
+  ![Analytics rule configuration](screenshots02-analytics-rule-config.png.png)
 - **Query schedule:** runs every 1 hour, looks back 24 hours
 - **Alert threshold:** triggers when query returns more than 0 results
 - **Incident creation:** enabled — matching alerts automatically generate a Sentinel incident for triage
@@ -117,7 +118,7 @@ the attacker's IP address:
 
 Response actions taken against the compromised account (`ceo@jephetagyaregmail.onmicrosoft.com`) directly in Microsoft Entra ID:
 
-1. **Revoked all active sessions** — invalidated all refresh tokens for the account, forcing re-authentication across every device and session.
+1. **Revoked all active sessions** — invalidated all refresh tokens for the account, forcing re-authentication across every device and session. ![Session revocation confirmation](screenshots08-containment-revoke-sessions.png.png)
 2. **Force password reset** — issued a new temporary password, retiring any credential the attacker may have obtained.
 
 Recommended follow-up actions for a live incident (not required for this simulation):
@@ -129,3 +130,4 @@ Recommended follow-up actions for a live incident (not required for this simulat
 ## Resolution
 
 Incident classified as **True Positive — Compromised Account**, status **In Progress**. All containment actions completed.
+![Incident resolved - True Positive](screenshots11-incident-resolved-true-positive.png.png)
